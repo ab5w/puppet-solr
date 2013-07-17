@@ -148,7 +148,7 @@ shift
 ##################################################
 # Read any configuration files
 ##################################################
-for CONFIG in /etc/default/solr-jetty{,7} $HOME/.solr-jettyrc; do
+for CONFIG in /etc/default/solr43-jetty{,7} $HOME/.solr43-jettyrc; do
   if [ -f "$CONFIG" ] ; then 
     readConfig "$CONFIG"
   fi
@@ -322,7 +322,7 @@ fi
 #####################################################
 if [ -z "$SOLR_PID" ] 
 then
-  SOLR_PID="$SOLR_RUN/solr.pid"
+  SOLR_PID="$SOLR_RUN/solr43.pid"
 fi
 
 ##################################################
@@ -384,7 +384,7 @@ esac
 #####################################################
 # Add jetty properties to Java VM options.
 #####################################################
-JAVA_OPTIONS+=("-Dsolr.solr.home=$SOLR_HOME" "-Djetty.home=$JETTY_HOME" "-Djava.io.tmpdir=$TMPDIR")
+JAVA_OPTIONS+=("-Dsolr.solr.home=$SOLR_HOME" "-Djetty.home=$JETTY_HOME" "-Djava.io.tmpdir=$TMPDIR" "-Xms50G -Xmx60G" "-Djava.util.logging.config.file=logging.properties")
 
 [ -f "$JETTY_HOME/etc/start.config" ] && JAVA_OPTIONS=("-DSTART=$JETTY_HOME/etc/start.config" "${JAVA_OPTIONS[@]}")
 

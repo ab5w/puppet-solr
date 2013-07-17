@@ -1,56 +1,15 @@
 puppet-solr
 ===========
 
-Puppet module for installing solr with a stand alone jetty server.  The server will default to port 8983 and store it's data in /var/lib/solr.  Configuration files can be found at /etc/solr.  
+Puppet module for installing solr with a stand alone jetty server.
+ 
+This module has been changed to allow two versions (4.3.0 and 3.6.0) to run on the same servers and listening on different ports.
 
-This install has been tested on:
+To use you would include the following into your site.pp;
 
-* Ubuntu 12.04
-* RHEL 6.4
+	class { 'solr::solr36': }
 
-Using this manifest
------------
+	class { 'solr::solr43': }
 
-To download a copy of solr into /opt/solr.
+You can set the version required in each of the solr*.pp files in manifests, however be aware that solr36.pp pulls the download from the archive site.
 
-1. Check out this repository in your modules directory
-2. Add the following to your base manifest (Note that including an appropriate JDK is left to you):
-
-```pp
-package { 'default-jdk': }
-
-include solr
-```
-
-
-You can also install a tomcat server to host solr.  If so you don't need
-to include, just add the module to your modules path and include this in
-your manifest.  This example sets up a tomcat server and provides a
-zookeeper host to connect in order to run solrCloud.
-
-```pp
-
-package { 'default-jdk': }
-
-class { "solr::tomcat6":
-  zookeeper_hosts => "ec2-72-44-55-216.compute-1.amazonaws.com:2181/cld2", 
-  cloud_shards => 1
-}
-```
-
-For more tomcat configuration options see the tomcat6.pp file in
-manifests.
-
-
-
-Working with Solr Cloud
------------------------
-
-```pp
-package { 'default-jdk' }
-
-class {'solr':
-  number_of_cloud_shards => 2,
-  zookeeper_hosts        => ["example.com:2181", "anotherserver.org:2181/alternate_root"]
-}
-```

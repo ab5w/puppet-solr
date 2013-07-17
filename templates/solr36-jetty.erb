@@ -1,0 +1,14 @@
+JAVA_HOME=/usr/java/default # Path to Java
+NO_START=0 # Start on boot
+JETTY_HOST=0.0.0.0 # Listen to all hosts
+JETTY_USER=solr36 # Run as this user
+JETTY_HOME=/opt/solr36/example
+SOLR_HOME=/etc/solr36
+SOLR_PORT=8360
+SOLR_LOGS=/var/logs/solr36
+<% if @zookeeper_hosts %>
+ZOOKEEPER_HOSTS=<%= @zookeeper_hosts %>
+<% end -%>
+<% if @number_of_cloud_shards %>
+NUM_SHARDS=<%= @number_of_cloud_shards %>
+<% end -%>
