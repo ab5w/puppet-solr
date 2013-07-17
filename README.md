@@ -3,7 +3,7 @@ puppet-solr
 
 Puppet module for installing solr with a stand alone jetty server.
  
-This module has been changed to allow two versions (4.3.0 and 3.6.0) to run on the same servers and listening on different ports.
+This module has been changed to allow two versions (4.3.0 and 3.6.0) to run on the same server and listening on different ports.
 
 To use you would include the following into your site.pp;
 
